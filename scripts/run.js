@@ -6,14 +6,14 @@ const main = async () => {
   console.log("Contract deployed to:", domainContract.address);
 	console.log("Contract deployed by:", owner.address);
 	
-	const txn = await domainContract.register("doom");
+	let txn = await domainContract.register("zralkh");
 	await txn.wait();
 
-  const domainOwner = await domainContract.getAddress("doom");
-  console.log("Owner of domain:", domainOwner);
-
-
-txn = await domainContract.connect(randomPerson).setRecord("doom", "Haha my domain now!");
+  const domainAddress = await domainContract.getAddress("zralkh");
+  console.log("Owner of domain zralkh:", domainAddress);
+	
+	// Trying to set a record that doesn't belong to me!
+  txn = await domainContract.connect(owner).setRecord("zralkh", "Haha my domain now!");
   await txn.wait();
 }
 
